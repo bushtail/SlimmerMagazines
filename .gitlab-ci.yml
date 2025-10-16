@@ -1,4 +1,4 @@
-﻿variables:
+variables:
   RELEASE_NAME: "SlimmerMagazines"
   AUTHOR: "bushtail"
   DLL_NAME: "SlimmerMagazines.dll"
@@ -9,7 +9,7 @@ stages:
   - build
   - package
   - release
-
+  
 build:
   stage: build
   image: mcr.microsoft.com/dotnet/sdk:9.0
