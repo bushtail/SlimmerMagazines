@@ -24,14 +24,17 @@ public class ReduceMagazineThickness(ISptLogger<ReduceMagazineThickness> logger,
         foreach (var item in _itemsDb.Where(item => item.Value.Parent.Equals(Parent)))
         {
             if (item.Value.Properties is null) continue;
-            
-            if (item.Value.Properties.Width == 2)
-                item.Value.Properties.Width = 1;
 
-            if (item.Value.Properties.Height == 3)
+            if (item.Value.Properties.Width == 2)
+            {
+                item.Value.Properties.Width = 1;
+                mags++;
+            } 
+            else if (item.Value.Properties.Height == 3)
+            {
                 item.Value.Properties.Height = 2;
-            
-            mags++;
+                mags++;
+            }
         }
         
         logger.Info($"[SM] Slimmed down {mags} magazines!");
