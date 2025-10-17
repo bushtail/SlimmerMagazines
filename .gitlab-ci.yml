@@ -24,7 +24,6 @@ build:
   artifacts:
     paths:
       - build_output
-    expire_in: 1h
 
 package:
   stage: package
