@@ -25,12 +25,12 @@ public class ReduceMagazineThickness(ISptLogger<ReduceMagazineThickness> logger,
         {
             if (item.Value.Properties is null) continue;
 
-            if (item.Value.Properties.Width == 2)
+            if (item.Value.Properties.Width == 2 && item.Value.Properties.Height > 1)
             {
                 item.Value.Properties.Width = 1;
                 mags++;
             } 
-            else if (item.Value.Properties.Height == 3)
+            else if (item.Value.Properties.Height == 3 && item.Value.Properties.Width == 1)
             {
                 item.Value.Properties.Height = 2;
                 mags++;
