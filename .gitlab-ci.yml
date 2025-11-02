@@ -3,7 +3,7 @@ variables:
   AUTHOR: "bushtail"
   DLL_NAME: "SlimmerMagazines.dll"
   OUTPUT_DIR: "SPT/user/mods"
-  VERSION: "1.0.5"
+  VERSION: "1.0.6"
 
 stages:
   - build
