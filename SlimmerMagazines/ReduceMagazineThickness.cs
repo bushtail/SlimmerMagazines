@@ -9,7 +9,7 @@ using SPTarkov.Server.Core.Servers;
 namespace SlimmerMagazines;
 
 [UsedImplicitly]
-[Injectable(TypePriority = OnLoadOrder.PostDBModLoader + 3)]
+[Injectable(TypePriority = OnLoadOrder.TraderRegistration - 1)]
 public class ReduceMagazineThickness(ISptLogger<ReduceMagazineThickness> logger, DatabaseServer databaseServer) : IOnLoad
 {
     private const string Parent = "5448bc234bdc2d3c308b4569";
@@ -28,6 +28,7 @@ public class ReduceMagazineThickness(ISptLogger<ReduceMagazineThickness> logger,
             if (item.Value.Properties.Width == 2 && item.Value.Properties.Height > 1)
             {
                 item.Value.Properties.Width = 1;
+                item.Value.Properties.ExtraSizeDown = 0;
                 mags++;
             } 
             else if (item.Value.Properties.Height == 3 && item.Value.Properties.Width == 1)
