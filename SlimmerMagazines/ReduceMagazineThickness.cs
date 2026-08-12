@@ -1,25 +1,24 @@
 ﻿using JetBrains.Annotations;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 
 namespace SlimmerMagazines;
 
-[UsedImplicitly]
-[Injectable(TypePriority = OnLoadOrder.TraderRegistration - 1)]
-public class ReduceMagazineThickness(ISptLogger<ReduceMagazineThickness> logger, DatabaseServer databaseServer) : IOnLoad
+[Injectable(TypePriority = OnLoadOrder.TraderRegistration - 1), UsedImplicitly]
+public class ReduceMagazineThickness(ISptLogger<ReduceMagazineThickness> logger, TemplateTable templateTable) : IOnLoad
 {
     private const string Parent = "5448bc234bdc2d3c308b4569";
     private Dictionary<MongoId, TemplateItem>? _itemsDb;
     
-    public Task OnLoad()
+    public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         logger.Info("[SM] Putting magazines on a diet...");
         var mags = 0;
-        _itemsDb = databaseServer.GetTables().Templates.Items;
+        _itemsDb = templateTable.Items;
 
         foreach (var item in _itemsDb.Where(item => item.Value.Parent.Equals(Parent)))
         {
